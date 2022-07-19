@@ -2,6 +2,8 @@
 
 A set of endpoints for maintaining a JWT session on an Express server.
 
+![Tests badge](https://github.com/lukedupuis/sempervirens-plugin-session-endpoints/actions/workflows/main.yml/badge.svg?event=push) ![Version badge](https://img.shields.io/static/v1?label=Node&labelColor=30363c&message=16.x&color=blue)
+
 ## Installation
 
 `npm i @sempervirens/plugin-session-endpoints`
