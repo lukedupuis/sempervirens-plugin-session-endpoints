@@ -1,0 +1,37 @@
+{
+  "name": "@sempervirens/plugin-session-endpoints",
+  "version": "0.0.1",
+  "description": "A set of endpoints for maintaining a JWT session on an Express server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "cd test && mocha *.test.js --timeout=5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukedupuis/sempervirens-plugin-session-endpoints.git"
+  },
+  "keywords": [
+    "Express",
+    "plugins",
+    "endpoints",
+    "JWT",
+    "session"
+  ],
+  "author": "Luke Dupuis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukedupuis/sempervirens-plugin-session-endpoints/issues"
+  },
+  "homepage": "https://github.com/lukedupuis/sempervirens-plugin-session-endpoints#readme",
+  "dependencies": {
+    "@sempervirens/authorizer": "^0.5.0",
+    "@sempervirens/endpoint": "^0.8.2"
+  },
+  "devDependencies": {
+    "@sempervirens/server": "^0.0.5",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "superagent": "^8.0.0"
+  }
+}
