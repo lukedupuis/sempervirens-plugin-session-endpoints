@@ -51,7 +51,7 @@ describe('1. sessionEndpoints', () => {
         expect(isValid).to.be.true;
       });
 
-      it('1.1.2.2. Should return "isValid" as "false" for an invalid token', async () => {
+      it('1.1.2.2. Should return "isValid" as "false" for an Token is invalid.', async () => {
         // return;
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         authorizer.invalidate(token);

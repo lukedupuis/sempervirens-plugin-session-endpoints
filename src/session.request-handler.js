@@ -42,7 +42,7 @@ class SessionRequestHandler extends RequestHandler {
 
   #reset() {
     if (!authorizer.isValid(this.req)) {
-      throw new Error('USER_ERROR: Invalid token');
+      throw new Error('USER_ERROR: Token is invalid.');
     }
     return authorizer.reset(this.req);
   }
