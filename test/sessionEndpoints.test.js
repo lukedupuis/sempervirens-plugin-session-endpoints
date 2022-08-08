@@ -31,7 +31,7 @@ describe('1. sessionEndpoints', () => {
       // return;
       it('1.1.1.1. Should ecrypt the data and return a valid token', async () => {
         const { body: { data: { token } } } = await superagent
-          .post('http://localhost:8080/site-1/api/session/start')
+          .post('http://localhost:8080/api/session/start')
           .send({ prop1: 'val1' });
         expect(authorizer.isValid(token)).to.be.true;
         const { prop1 } = authorizer.decrypt(token);
@@ -46,7 +46,7 @@ describe('1. sessionEndpoints', () => {
         // return;
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         const { body: { data: { isValid } } } = await superagent
-          .get('http://localhost:8080/site-1/api/session/validate')
+          .get('http://localhost:8080/api/session/validate')
           .set('Authorization', `Bearer ${token}`);
         expect(isValid).to.be.true;
       });
@@ -56,7 +56,7 @@ describe('1. sessionEndpoints', () => {
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         authorizer.invalidate(token);
         const { body: { data: { isValid } } } = await superagent
-          .get('http://localhost:8080/site-1/api/session/validate')
+          .get('http://localhost:8080/api/session/validate')
           .set('Authorization', `Bearer ${token}`);
         expect(isValid).to.be.false;
       });
@@ -72,7 +72,7 @@ describe('1. sessionEndpoints', () => {
         const decrypted1 = authorizer.decrypt(token1);
         await new Promise(resolve => setTimeout(() => resolve(), 1200));
         const { body: { data: { token: token2 } } } = await superagent
-          .get('http://localhost:8080/site-1/api/session/reset')
+          .get('http://localhost:8080/api/session/reset')
           .set('Authorization', `Bearer ${token1}`);
         const decrypted2 = authorizer.decrypt(token2);
         expect(decrypted2.origIat).to.equal(decrypted1.iat);
@@ -84,7 +84,7 @@ describe('1. sessionEndpoints', () => {
         // return;
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         await superagent
-          .get('http://localhost:8080/site-1/api/session/reset')
+          .get('http://localhost:8080/api/session/reset')
           .set('Authorization', `Bearer ${token}`);
         expect(authorizer.isValid(token)).to.be.false;
       });
@@ -96,7 +96,7 @@ describe('1. sessionEndpoints', () => {
       it('1.1.4.1. Invalidate the token', async () => {
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         await superagent
-          .get('http://localhost:8080/site-1/api/session/stop')
+          .get('http://localhost:8080/api/session/stop')
           .set('Authorization', `Bearer ${token}`);
         expect(authorizer.isValid(token)).to.be.false;
       });

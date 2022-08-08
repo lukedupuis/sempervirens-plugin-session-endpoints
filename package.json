@@ -26,10 +26,10 @@
   "homepage": "https://github.com/lukedupuis/sempervirens-plugin-session-endpoints#readme",
   "dependencies": {
     "@sempervirens/authorizer": "^0.5.0",
-    "@sempervirens/endpoint": "^0.8.2"
+    "@sempervirens/endpoint": "^0.9.1"
   },
   "devDependencies": {
-    "@sempervirens/server": "^0.0.5",
+    "@sempervirens/server": "^0.2.1",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "superagent": "^8.0.0"
