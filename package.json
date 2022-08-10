@@ -1,6 +1,6 @@
 {
   "name": "@sempervirens/plugin-session-endpoints",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A set of endpoints for maintaining a JWT session on an Express server",
   "main": "index.js",
   "type": "module",
