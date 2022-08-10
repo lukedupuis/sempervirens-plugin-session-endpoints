@@ -29,7 +29,7 @@
     "@sempervirens/endpoint": "^0.9.1"
   },
   "devDependencies": {
-    "@sempervirens/server": "^0.2.1",
+    "@sempervirens/server": "^0.3.0",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "superagent": "^8.0.0"
