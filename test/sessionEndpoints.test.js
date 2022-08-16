@@ -28,7 +28,6 @@ describe('1. sessionEndpoints', () => {
     }).start({ suppressLog: true });
 
     describe('1.1.1. When "POST /api/session/start" is called', () => {
-      // return;
       it('1.1.1.1. Should ecrypt the data and return a valid token', async () => {
         const { body: { data: { token } } } = await superagent
           .post('http://localhost:8080/api/session/start')
@@ -40,10 +39,8 @@ describe('1. sessionEndpoints', () => {
     });
 
     describe('1.1.2. When "GET /api/session/validate" is called', () => {
-      // return;
 
       it('1.1.2.1. Should return "isValid" as "true" for a valid token', async () => {
-        // return;
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         const { body: { data: { isValid } } } = await superagent
           .get('http://localhost:8080/api/session/validate')
@@ -52,7 +49,6 @@ describe('1. sessionEndpoints', () => {
       });
 
       it('1.1.2.2. Should return "isValid" as "false" for an Token is invalid.', async () => {
-        // return;
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         authorizer.invalidate(token);
         const { body: { data: { isValid } } } = await superagent
@@ -64,10 +60,8 @@ describe('1. sessionEndpoints', () => {
     });
 
     describe('1.1.3. When "GET /api/session/reset" is called', () => {
-      // return;
 
       it('1.1.3.1. Should return a new token with the same data as the first and "origIat" as the first "iat"', async () => {
-        // return;
         const token1 = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         const decrypted1 = authorizer.decrypt(token1);
         await new Promise(resolve => setTimeout(() => resolve(), 1200));
@@ -80,19 +74,18 @@ describe('1. sessionEndpoints', () => {
         expect(decrypted2.prop1).to.equal('val1');
       });
 
-      it('1.1.3.2. Should invalidte the first token', async () => {
-        // return;
-        const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
-        await superagent
+      it('1.1.3.2. Should keep the first token valid and return a new token', async () => {
+        const token1 = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
+        const { body: { data: { token: token2 } } } = await superagent
           .get('http://localhost:8080/api/session/reset')
-          .set('Authorization', `Bearer ${token}`);
-        expect(authorizer.isValid(token)).to.be.false;
+          .set('Authorization', `Bearer ${token1}`);
+        expect(authorizer.isValid(token1)).to.be.true;
+        expect(authorizer.isValid(token2)).to.be.true;
       });
 
     });
 
     describe('1.1.4. When "GET /api/session/stop" is called', () => {
-      // return;
       it('1.1.4.1. Invalidate the token', async () => {
         const token = authorizer.encrypt({ expiresIn: '1m', data: { prop1: 'val1' } });
         await superagent
